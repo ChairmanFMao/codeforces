@@ -11,19 +11,21 @@ vector<vector<pair<ll,ll>>> dp(mxN+1);
 void solve() {
     int n, l, k;
     cin >> n >> l >> k;
-    int coords[n], limit[n];
+    int coords[n+1], limit[n];
     for (int i = 0; i < n; i++)
         cin >> coords[i];
     for (int i = 0; i < n; i++)
         cin >> limit[i];
+    coords[n] = l;
     
     // Somehow you use dynamic programming to do this, unsure exactly how to apply it
-    dp[1].push_back({limit[0]*coords[0],0});
+    // Need to somehow chain the removal of signs
+    dp[0].push_back({limit[0]*coords[0],0});
     for (int i = 1; i < n; i++) {
         for (int j = 0; j < (int) dp[i].size(); j++) {
             if (dp[i][j].second < k)
-                dp[i+1].push_back({dp[i][j].first + (coords[i]-coords[i-1])*limit[i-1], dp[i][j].second + 1});
-            dp[i+1].push_back({dp[i][j].first + (coords[i]-coords[i-1])*limit[i], dp[i][j].second});
+                dp[i+1].push_back({dp[i][j].first + (coords[i+1]-coords[i])*limit[i-1], dp[i][j].second + 1});
+            dp[i+1].push_back({dp[i][j].first + (coords[i+1]-coords[i])*limit[i], dp[i][j].second});
         }
     }
 
