@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+// Honestly no idea what I'm doing for this problem
+
+vector<pair<int,int>> pairs, other;
+vector<int> occurs;
+vector<bool> used;
+
+void solve() {
+    int n;
+    cin >> n;
+
+    for(int i = 0; i <= n; i++)
+        occurs.push_back(0);
+    int bi = 0;
+    for (int i = 0,l,r; i < n; i++) {
+        cin >> l >> r;
+        if (l == 1 && r == n)
+            bi = i;
+        pairs.push_back({l,r});
+        used.push_back(0);
+        occurs[l]++;
+        occurs[r]++;
+    }
+    used.push_back(0);
+    bool removeBig = evaluate({1,n}, bi);
+
+    for (int i = 0; i < pairs.size(); i++) {
+        if (pairs[i].first == pairs[i].second) {
+            cout << pairs[i].first << " " << pairs[i].second << " " << pairs[i].second << "\n";
+            used[pairs[i].first] = 1;
+            occurs[pairs[i].first] -= 2;
+        }
+    }
+    while (pairs.size() > 0) {
+        other.clear();
+        for (int i = 0; i < pairs.size(); i++) {
+            if (removeBig)
+                if (pairs[i].first == 1 && pairs[i].second == n)
+                    continue;
+            if (pairs[i].first == pairs[i].second)
+                continue;
+            if ((occurs[pairs[i].first] == 1 || used[pairs[i].second]) && !used[pairs[i].first]) {
+                cout << pairs[i].first << " " << pairs[i].second << " " << pairs[i].first << "\n";
+                occurs[pairs[i].first]--;
+                occurs[pairs[i].second]--;
+                used[pairs[i].first] = 1;
+            } else if ((occurs[pairs[i].second] == 1 || used[pairs[i].first]) && !used[pairs[i].second]) {
+                cout << occurs[pairs[i].second] << " " << used[pairs[i].first] << "\n";
+                cout << pairs[i].first << " " << pairs[i].second << " " << pairs[i].second << "\n";
+                occurs[pairs[i].second]--;
+                occurs[pairs[i].first]--;
+                used[pairs[i].second] = 1;
+            } else
+                other.push_back(pairs[i]);
+        }
+        pairs = other;
+    }
+    cout << "\n";
+    // Maybe start with the biggest pair and look for how it could've been split up into smaller pairs, recursive
+}
+
+int main(void) {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    cout << "\n";
+    int t;
+    cin >> t;
+    for (int i = 1; i <= t; ++i)
+        solve();
+}

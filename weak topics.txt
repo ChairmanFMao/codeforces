@@ -1,0 +1,22 @@
+Current topic of focus: strings
+
+As of right now, these are how I rank some of the most common topics.
+
+Strong topics:
+math
+bitmasks
+implementation
+brute force
+sortings
+dfs and similar
+data structures
+binary search
+
+Weak topics:
+
+strings
+dynamic programming
+DSU(disjoint set union)
+constructive algorithms
+greedy
+binary search
