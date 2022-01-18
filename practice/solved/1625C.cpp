@@ -7,11 +7,7 @@ using namespace std;
 // Keeps screwing up on test case 8, idk what the issue is as the code works fine for other tests
 // Basically, some states that have lower speed and larger time are better than states with higher speed and lower time
 // Need to make it consider these states, time complexity should go to O(n^3)
-
-const int mxN = 500;
-const ll INF = 1000000000000000ll;
-// Vector for all of the points, map for the number of removals done
-vector<map<ll,pair<ll,ll>>> dp(mxN+1);
+// Mainly just copied of tourist
 
 void solve() {
     ll n, l, k;
@@ -23,34 +19,30 @@ void solve() {
         cin >> limit[i];
     coords[n] = l;
 
-    // This initally sets the distance to every state to infinity
-    pair<ll,ll> fill = {INF,INF};
-    for (int i = 0; i <= n; i++)
-        for (int j = 0; j <= k; j++)
-            dp[i][j] = fill;
-    
-    // This is here as the first sign can't be removed
-    dp[0][0] = {0,limit[0]};
-    for (int i = 0; i < n; i++) {
+    // Sets up the dp to be ready with all initally infinity
+    vector<vector<ll>> dp(n+1, vector<ll>(k+1,(ll)1e18));
+
+    dp[0][0] = 0;
+    for (int i = 1; i <= n; i++) {
         // This goes over all of the possible choices that could've been made
         for (int j = 0; j <= k; j++) {
-            // This is to skip the current road sign
-            if (j < k) {
-                if (dp[i][j].first + (coords[i+1]-coords[i])*dp[i][j].second < dp[i+1][j+1].first)
-                    dp[i+1][j+1] = {dp[i][j].first + (coords[i+1]-coords[i])*dp[i][j].second,dp[i][j].second};
+            for (int m = i-1; m >= 0; m--) {
+                // This is the number of signs remaining
+                int prevj = j - (i-m-1);
+                // This line ensure that the limit of k is not passed
+                if (prevj >= 0) {
+                    dp[i][j] = min(dp[i][j], dp[m][prevj] + (coords[i]-coords[m]) * limit[m]);
+                }
             }
-            // This is to not skip the current sign
-            if (dp[i][j].first + (coords[i+1]-coords[i])*limit[i] < dp[i+1][j].first)
-                dp[i+1][j] = {dp[i][j].first + (coords[i+1]-coords[i])*limit[i],limit[i]};
         }
     }
 
     // This iterates over all of the totals for every number of signs removed, getting the lowest
-    ll out = INF;
+    ll out = (ll)1e18;
     for (int i = 0; i <= k; i++)
-        out = min(out, dp[n][i].first);
+        out = min(out, dp[n][i]);
     
-    std::cout << out << "\n";
+    cout << out << "\n";
 }
 
 int main(void) {

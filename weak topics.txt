@@ -2,6 +2,8 @@ Current topic of focus: strings
 
 As of right now, these are how I rank some of the most common topics.
 
+Need to focus on doing more problem C div 2 kinda ~1700 difficulty
+
 Strong topics:
 math
 bitmasks
