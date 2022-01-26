@@ -5,6 +5,7 @@ using namespace std;
 
 // I had to look at the solution, kinda stuck when I first saw the problem
 // Took a little while to get my head around the problem statement.
+// Did end up eventually looking at the solution, very nice maths
 
 void solve() {
     ll n;
