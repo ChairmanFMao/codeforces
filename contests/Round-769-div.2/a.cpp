@@ -3,18 +3,13 @@ using namespace std;
 #define ll long long
 
 void solve() {
+    int n;
     string s;
-    cin >> s;
-
-    if (s.size() & 1) {
-        cout << "NO" << "\n";
-        return;
-    }
-    if (s.substr(0,s.size()/2) == s.substr(s.size()/2)) {
+    cin >> n >> s;
+    if (n < 3 && s != "11" && s != "00")
         cout << "YES" << "\n";
-    } else {
+    else
         cout << "NO" << "\n";
-    }
 }
 
 int main(void) {

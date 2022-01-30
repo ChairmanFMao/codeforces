@@ -4,15 +4,13 @@ using namespace std;
 
 void solve() {
     int n;
-    cin >> n;
-
-    set<int> numbers;
-    for (int i = 1; i*i <= n; i++)
-        numbers.insert(i*i);
-    for (int i = 1; i*i*i <= n; i++)
-        numbers.insert(i*i*i);
-
-    cout << numbers.size() << "\n";
+    string s;
+    cin >> n >> s;
+    if (n >= 3)
+        cout << "NO";
+    else
+        cout << "YES";
+    cout << "\n";
 }
 
 int main(void) {
