@@ -3,7 +3,9 @@ using namespace std;
 #define ll long long
 
 void solve() {
-	
+	int n;
+	cin >> n;
+	cout << (1 << n)-1 << "\n";
 }
 
 int main(void) {
@@ -16,3 +18,4 @@ int main(void) {
 	for (int i = 1; i <= t; ++i)
 		solve();
 }
+
