@@ -1,11 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define sz(c) (int)c.size()
-#define all(c) c.begin(),c.end()
 
 void solve() {
-	
+	int n;
+	cin >> n;
+
+	cout << n-3 << " 1 1 1\n";
 }
 
 int main(void) {
@@ -18,3 +19,4 @@ int main(void) {
 	for (int i = 1; i <= t; ++i)
 		solve();
 }
+

@@ -1,11 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define sz(c) (int)c.size()
-#define all(c) c.begin(),c.end()
 
 void solve() {
+	int x, y;
+	cin >> x >> y;
+
+	if (!x && !y) {
+		cout << "0\n";
+		return;
+	}
 	
+	if (sqrt(x*x+y*y) == (int)sqrt(x*x+y*y)) {
+		cout << "1\n";
+		return;
+	}
+	cout << "2\n";
+	return;
 }
 
 int main(void) {
@@ -18,3 +29,4 @@ int main(void) {
 	for (int i = 1; i <= t; ++i)
 		solve();
 }
+

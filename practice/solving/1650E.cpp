@@ -7,6 +7,7 @@ using namespace std;
 // When we remove the gap we need to merge the two gaps that match up
 // Currently WA on test 2, part 40 - expected 7 instead of 5
 // Unsure where the error is - look forward to debugging later
+// THIS WORKS!!! - this is so epic!
 
 void solve() {
 	int n, d;
@@ -17,7 +18,7 @@ void solve() {
 		cin >> a;
 		numbers.push_back(a);
 	}
-	numbers.push_back(d+2);
+	numbers.push_back(d+1);
 
 	// This is just an edge case where you can't insert any exam in a different spot
 	if (n == d) {
@@ -41,15 +42,35 @@ void solve() {
 	vector<int> gCopy1(gaps.begin(), gaps.end()), gCopy2(gaps.begin(), gaps.end());
 	int out = lowest, newGap = 0;
 
+	/*
+	cout << "gaps: ";
+	for (int i : gaps)
+		cout << i << " ";
+	cout << "\n";
+	*/
+
 	// This is if the gap isn't the first element - testing removing left
 	if (index > 0) {
 		gCopy1[index-1] += gCopy1[index] +1;
 		gCopy1[index] = 0;
 		
-		newGap = (*max_element(gCopy1.begin(),gCopy1.end())-1)/2;
+		newGap = 0;
+		for (int i = 0; i < (int)gCopy1.size(); i++) {
+			if (i == (int)gCopy1.size()-1)
+				newGap = max(newGap, gCopy1[i]-1);
+			else
+				newGap = max(newGap, (gCopy1[i]-1)/2);
+		}
 		gCopy1.pop_back();
 		gCopy1.push_back(newGap);
 		gCopy1[index] = 1e9;
+		
+		/*
+		cout << "gCopy1: ";
+		for (int i : gCopy1)
+			cout << i << " ";
+		cout << "\n";
+		*/
 
 		out = max(out, *min_element(gCopy1.begin(),gCopy1.end()));
 	} 
@@ -58,10 +79,23 @@ void solve() {
 		gCopy2[index+1] += gCopy2[index] +1;
 		gCopy2[index] = 0;
 
-		newGap = (*max_element(gCopy2.begin(),gCopy2.end())-1)/2;
+		newGap = 0;
+		for (int i = 0; i < (int)gCopy2.size(); i++) {
+			if (i == (int)gCopy2.size()-1)
+				newGap = max(newGap, gCopy2[i]-1);
+			else
+				newGap = max(newGap, (gCopy2[i]-1)/2);
+		}
 		gCopy2.pop_back();
 		gCopy2.push_back(newGap);
 		gCopy2[index] = 1e9;
+		
+		/*
+		cout << "gCopy2: ";
+		for (int i : gCopy2)
+			cout << i << " ";
+		cout << "\n";
+		*/
 
 		out = max(out, *min_element(gCopy2.begin(),gCopy2.end()));
 	}
