@@ -5,20 +5,20 @@ using namespace std;
 #define all(c) c.begin(),c.end()
 
 void solve() {
-	int n;
+	ll n;
 	cin >> n;
-	int third = n/3;
-	cout << third + (n%3==1?1:0) << " " << third+(n%3==2?1:0) << "\n";
+
+	if (n & 1) {
+		cout << "0\n";
+	} else {
+		cout << (1 << (n>>1)) << "\n";
+	}
 }
 
 int main(void) {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 	
-	cout << "\n";
-	int t;
-	cin >> t;
-	for (int i = 1; i <= t; ++i)
-		solve();
+	solve();
 }
 

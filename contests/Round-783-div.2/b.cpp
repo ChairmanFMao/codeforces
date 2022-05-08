@@ -5,10 +5,19 @@ using namespace std;
 #define all(c) c.begin(),c.end()
 
 void solve() {
-	int n;
-	cin >> n;
-	int third = n/3;
-	cout << third + (n%3==1?1:0) << " " << third+(n%3==2?1:0) << "\n";
+	int n, m;
+	cin >> n >> m;
+	vector<int> a(n);
+	for (int& i : a)
+		cin >> i;
+
+	sort(all(a),greater<int>());
+	ll out = a[0] + n;
+	for (int i = 0; i < n-1; i++) {
+		out += a[i];
+	}
+
+	cout << (out > m ? "NO" : "YES") << "\n";
 }
 
 int main(void) {

@@ -5,10 +5,18 @@ using namespace std;
 #define all(c) c.begin(),c.end()
 
 void solve() {
-	int n;
-	cin >> n;
-	int third = n/3;
-	cout << third + (n%3==1?1:0) << " " << third+(n%3==2?1:0) << "\n";
+	int n, m;
+	cin >> n >> m;
+
+	if ((n == 1 && m > 2) || (m == 1 && n > 2)) {
+		cout << "-1\n";
+		return;
+	}
+
+	n--;
+	m--;
+
+	cout << 2*min(n,m) + 4*((max(n,m)-min(n,m))/2) + ((max(n,m)-min(n,m))%2 == 1 ? 1 : 0) << "\n";
 }
 
 int main(void) {

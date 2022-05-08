@@ -7,15 +7,14 @@ using namespace std;
 void solve() {
 	int n;
 	cin >> n;
-	int third = n/3;
-	cout << third + (n%3==1?1:0) << " " << third+(n%3==2?1:0) << "\n";
+	cout << "Division ";
+	cout << (1900 <= n ? 1 : 1600 <= n ? 2 : 1400 <= n ? 3 : 4) << "\n";
 }
 
 int main(void) {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 	
-	cout << "\n";
 	int t;
 	cin >> t;
 	for (int i = 1; i <= t; ++i)

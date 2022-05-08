@@ -7,8 +7,29 @@ using namespace std;
 void solve() {
 	int n;
 	cin >> n;
-	int third = n/3;
-	cout << third + (n%3==1?1:0) << " " << third+(n%3==2?1:0) << "\n";
+	vector<int> a(n);
+	for (int& i : a)
+		cin >> i;
+
+	int one = 0;
+	for (int i : a)
+		if (i == 1)
+			one++;
+
+	if (!one) {
+		cout << "YES\n";
+		return;
+	}
+
+	sort(all(a));
+	for (int i = 0; i < n-1; i++) {
+		if (a[i] == a[i+1] -1) {
+			cout << "NO\n";
+			return;
+		}
+	}
+
+	cout << "YES\n";
 }
 
 int main(void) {

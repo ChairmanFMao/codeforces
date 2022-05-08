@@ -7,8 +7,15 @@ using namespace std;
 void solve() {
 	int n;
 	cin >> n;
-	int third = n/3;
-	cout << third + (n%3==1?1:0) << " " << third+(n%3==2?1:0) << "\n";
+	vector<int> a(n);
+	for (int& i : a)
+		cin >> i;
+
+	int chops = 0;
+	for (int i : a)
+		chops += i-1;
+
+	cout << (chops & 1 ? "errorgorn" : "maomao90") << "\n";
 }
 
 int main(void) {

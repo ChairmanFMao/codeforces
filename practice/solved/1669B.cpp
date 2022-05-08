@@ -7,8 +7,21 @@ using namespace std;
 void solve() {
 	int n;
 	cin >> n;
-	int third = n/3;
-	cout << third + (n%3==1?1:0) << " " << third+(n%3==2?1:0) << "\n";
+	vector<int> a(n);
+	map<int,int> occurs;
+	for (int& i : a) {
+		cin >> i;
+		occurs[i]++;
+	}
+
+	for (int i = 0; i < n; i++) {
+		if (occurs[a[i]] >= 3) {
+			cout << a[i] << "\n";
+			return;
+		}
+	}
+
+	cout << "-1\n";
 }
 
 int main(void) {

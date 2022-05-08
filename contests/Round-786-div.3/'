@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define sz(c) (int)c.size()
+#define all(c) c.begin(),c.end()
+
+void solve() {
+	int n;
+	cin >> n;
+	vector<int> a(n);
+	for (int& i : a)
+		cin >> i;
+
+	// We are taking from end of a to middle of b
+	// then from middle of b to end of c
+	// Trying to achieve ascending order
+	// You need to make it so that the smallest elements are in the middle
+	
+	vector<int> f, s;
+	for (int i : a) {
+		if (sz(f) + sz(s) == 1)
+			s.push_back(i);
+		else if ((sz(f) + sz(s)) & 1) {
+			if (f[sz(f)-1] > s[sz(s)-1]) {
+				
+			}
+		} else {
+			f.push_back(i);
+		}
+	}
+}
+
+int main(void) {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	
+	cout << "\n";
+	int t;
+	cin >> t;
+	for (int i = 1; i <= t; ++i)
+		solve();
+}
+

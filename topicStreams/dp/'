@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define sz(c) (int)c.size()
+#define all(c) c.begin(),c.end()
+
+// Cubic time complexity would lead to timeout
+// My solution here got TLE, with early exit it passes just
+const int mxN = 1e3, INF = 1e9;
+int dp[mxN+1][8];
+
+void solve() {
+	for (int i = 0; i <= mxN; i++)
+		for (int j = 0; j < 8; j++)
+			dp[i][j] = INF;
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		int b;
+		string s;
+		cin >> b >> s;
+		int current = 0;
+		for (char c : s) {
+			if (c == 'A')
+				current |= 1;
+			if (c == 'B')
+				current |= 2;
+			if (c == 'C')
+				current |= 4;
+		}
+
+		for (int j = 0; j < 8; j++) {
+			dp[i][j] = min(dp[i][j], b);
+			dp[i][current|j] = min(dp[i][current|j], dp[i][current] + b)
+		}
+	}
+
+	cout << (dp[n][7] == INF ? -1 : dp[n][7]) << "\n";
+}
+
+int main(void) {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	
+	solve();
+}
+

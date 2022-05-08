@@ -7,8 +7,24 @@ using namespace std;
 void solve() {
 	int n;
 	cin >> n;
-	int third = n/3;
-	cout << third + (n%3==1?1:0) << " " << third+(n%3==2?1:0) << "\n";
+	vector<int> a(n);
+	for (int& i : a)
+		cin >> i;
+	
+	a[0]++;
+
+	for (int i = 0; i < n-1; i++) {
+		if (a[i] < a[i+1]-2) {
+			cout << "NO\n";
+			return;
+		} else if (a[i] == a[i+1]-2)
+			a[i+1]--;
+		else if (a[i] == a[i+1])
+			a[i+1]++;
+
+	}
+
+	cout << "YES\n";
 }
 
 int main(void) {
