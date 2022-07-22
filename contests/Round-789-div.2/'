@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define sz(c) (int)c.size()
+#define all(c) c.begin(),c.end()
+
+const int mxN = 5e3;
+
+// Quadratic time complexity leads to TLE on test 5
+// n is quite small on the scale of things
+
+void solve() {
+	int n;
+	cin >> n;
+	vector<int> p(n);
+	for (int& i : p)
+		cin >> i;
+
+	ll out = 0;
+	vector<vector<int> > bigger(n), smaller(n);
+	for (int i = 0; i < n; i++) {
+		for (int j = i+1; j < n; j++) {
+			if (p[j] > p[i])
+				bigger[i].push_back(j);
+			else
+				smaller[i].push_back(j);
+		}
+	}
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < sz(bigger[i]); j++) {
+			for (int k = i+1; k < bigger[i][j]; k++) {
+				for (int l = 0; l < sz(smaller[k]); l++) {
+					if (smaller[k][l] > bigger[i][j]) {
+						out += sz(smaller[k])-l;
+						break;
+					}
+				}
+			}
+		}
+	}
+	
+	cout << out << "\n";
+}
+
+int main(void) {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	
+	cout << "\n";
+	int t;
+	cin >> t;
+	for (int i = 1; i <= t; ++i)
+		solve();
+}
+
